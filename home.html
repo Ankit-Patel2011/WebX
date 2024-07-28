@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Service Portal</title>
+    <style>
+        /* styles.css */
+
+/* General styling remains the same */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f4f7f6;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #2c3e50;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #34495e;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #5d6d7e;
+    transform: scale(1.05);
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#search {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+    transition: width 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#search:focus {
+    width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #34495e;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn:hover {
+    background: #5d6d7e;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-results {
+    position: absolute;
+    top: 50px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+
+.search-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search-results li:hover {
+    background: #f0f2f5;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    padding: 20px;
+    background: #ecf0f1;
+}
+
+.sidebar {
+    flex: 0 0 200px;
+    background: #34495e;
+    padding: 20px;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.services-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background: #5d6d7e;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.services-list li:hover {
+    background: #7a8a97;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+
+.service-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.service-box {
+    width: 300px;
+    height: 300px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    animation: float 3s ease-in-out infinite;
+}
+
+.service-box:hover {
+    background: #b0efff;
+    transform: scale(1.05);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.box-content {
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+.service-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 0;
+    transform: scale(1.2);
+    opacity: 0;
+}
+
+.service-box:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+footer {
+    background: #2c3e50;
+    padding: 10px 20px;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #34495e;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-btn:hover {
+    background: #5d6d7e;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .header-nav, .search-container {
+        display: none;
+    }
+    
+    .sidebar {
+        display: none;
+    }
+    
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .service-box {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+ 
+#aa{
+    text-decoration: none;
+    color: rgb(7, 7, 7);
+}
+.au{
+    text-decoration: none;
+    font-size:1em;
+    color: white;
+}
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="logo">Community X</div>
+        <div class="header-nav">
+           <a href="https://ankit-patel2011.github.io/WebX/home.html"> <button class="nav-btn" >Home</button></a>
+           <a href="https://ankit-patel2011.github.io/WebX/profile.html"><button class="nav-btn">Profile</button></a>
+           
+            <a href="https://ankit-patel2011.github.io/WebX/services.html"><button class="nav-btn">Services</button></a>
+                <a href="https://ankit-patel2011.github.io/WebX/aware.html"><button class="nav-btn">Be aware</button></a>
+                    <a href="https://ankit-patel2011.github.io/WebX/contactus.html"><button class="nav-btn">Contact Us</button></a>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search lost items..." onkeyup="searchItems()">
+            <button class="search-btn" onclick="redirectToLostItems()">Search</button>
+            <div class="search-results" id="search-results">
+                <ul id="items-list">
+                   <li>Book</li> 
+                    <li>Cat</li>
+                    <li>Dog</li>
+                    <li>Earphones</li>
+                    <li>Fan</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="sidebar">
+            <ul class="services-list">
+               <a href="https://ankit-patel2011.github.io/WebX/lostItems.html" class="au" > <li>Lost Items</li> </a>
+               <a href="https://ankit-patel2011.github.io/WebX/founditems.html" class="au"><li>Found Items</li></a>
+               <a href="https://ankit-patel2011.github.io/WebX/purchase.html" class="au"><li>Items to Purchase</li></a>
+               <a href="https://ankit-patel2011.github.io/WebX/reportlostitems.html" class="au"><li>Report Lost Items</li></a>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="service-boxes">
+                <div class="service-box" >
+                    <div class="box-content"> <a href="https://ankit-patel2011.github.io/WebX/lostItems.html" id="aa">  Lost Items</a></div>
+                </div>
+                <div class="service-box" onclick="location.href='https://ankit-patel2011.github.io/WebX/founditems.html'">
+                    <div class="box-content">Found Items</div>
+                </div>
+                <div class="service-box" onclick="location.href='https://ankit-patel2011.github.io/WebX/purchase.html'">
+                    <div class="box-content">Items to Purchase</div>
+                </div>
+                <div class="service-box" onclick="location.href='https://ankit-patel2011.github.io/WebX/reportlostitems.html'">
+                    <div class="box-content">Report Lost Items</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+       <a href="https://ankit-patel2011.github.io/WebX/profile.html"> <button class="footer-btn">Profile</button></a>
+       <a href="https://ankit-patel2011.github.io/WebX/services.html"><button class="footer-btn">Services</button
+           
+        
+    </footer>
+    <script >
+        /* script.js */
+
+function searchItems() {
+    const query = document.getElementById('search').value.toLowerCase();
+    const itemsList = document.getElementById('items-list');
+    const items = itemsList.getElementsByTagName('li');
+    
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i].innerText.toLowerCase();
+        if (item.includes(query)) {
+            items[i].style.display = '';
+            items[i].classList.add('fade-in');
+        } else {
+            items[i].style.display = 'none';
+            items[i].classList.remove('fade-in');
+        }
+    }
+    
+    document.getElementById('search-results').style.display = query ? 'block' : 'none';
+}
+
+function redirectToLostItems() {
+    window.location.href = 'https://ankit-patel2011.github.io/WebX/lostitems.html';
+}l
+
+    </script>
+</body>
+</html>
